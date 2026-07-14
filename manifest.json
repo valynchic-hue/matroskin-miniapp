@@ -1,1 +1,21 @@
-
+{
+  "name": "Челленджи с Матроскиным",
+  "short_name": "Матроскин",
+  "description": "Молочный челлендж с котом Матроскиным",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fff8ed",
+  "theme_color": "#f5d742",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
