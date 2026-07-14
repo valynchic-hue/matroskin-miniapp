@@ -297,4 +297,129 @@
                     hash: 'matroskin_challenge'
                 });
             } catch(e) {
-                // Если не сработало — используем стандар
+                // Если не сработало — используем стандартный share
+                shareViaNavigator(message);
+            }
+        } else {
+            // Обычный браузер — используем Web Share API
+            shareViaNavigator(message);
+        }
+    }
+
+    function shareViaNavigator(message) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Челлендж с Матроскиным',
+                text: message,
+                url: window.location.href,
+            }).catch(() => {});
+        } else {
+            // Fallback: копируем в буфер обмена
+            navigator.clipboard.writeText(message + ' ' + window.location.href)
+                .then(() => alert('📋 Ссылка и текст скопированы! Поделись с друзьями!'))
+                .catch(() => alert('📤 Поделись результатом с друзьями!'));
+        }
+    }
+
+    // ============================================================
+    //  ОБРАБОТЧИКИ
+    // ============================================================
+    milkBtn.addEventListener('click', function() {
+        if (gameEnded) {
+            resetGame();
+            startGame();
+            humanAddMilk();
+            return;
+        }
+        if (!gameActive) {
+            startGame();
+            humanAddMilk();
+        } else {
+            humanAddMilk();
+        }
+    });
+
+    resetBtn.addEventListener('click', function() {
+        resetGame();
+        statusEl.innerHTML = '🔄 Готово. Нажми «Налить молоко» для старта!';
+    });
+
+    shareBtn.addEventListener('click', shareResult);
+
+    closeBtn.addEventListener('click', function() {
+        if (isVKApp && window.VK && window.VK.Widgets) {
+            try {
+                window.VK.Widgets.CloseApp();
+            } catch(e) {
+                window.close();
+            }
+        } else {
+            window.close();
+        }
+    });
+
+    // ============================================================
+    //  НАСТРОЙКИ
+    // ============================================================
+    winScoreSlider.addEventListener('input', function() {
+        settings.winScore = parseInt(this.value);
+        winScoreLabel.textContent = settings.winScore;
+        saveSettings(settings);
+        if (!gameActive && !gameEnded) {
+            updateUI();
+        }
+    });
+
+    gameDurationSlider.addEventListener('input', function() {
+        settings.gameDuration = parseInt(this.value);
+        gameDurationLabel.textContent = settings.gameDuration;
+        saveSettings(settings);
+    });
+
+    matroskinSpeedSelect.addEventListener('change', function() {
+        settings.matroskinSpeed = this.value;
+        saveSettings(settings);
+    });
+
+    document.getElementById('clearHistoryBtn').addEventListener('click', function() {
+        if (confirm('🗑️ Очистить всю историю игр?')) {
+            history = [];
+            saveHistory(history);
+            updateStatsUI();
+        }
+    });
+
+    // ============================================================
+    //  ВКЛАДКИ
+    // ============================================================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const pageId = 'page-' + this.dataset.tab;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            if (this.dataset.tab === 'stats') {
+                updateStatsUI();
+            }
+            if (this.dataset.tab === 'settings') {
+                updateSettingsUI();
+            }
+        });
+    });
+
+    // ============================================================
+    //  ИНИЦИАЛИЗАЦИЯ
+    // ============================================================
+    resetGame();
+    updateStatsUI();
+    updateSettingsUI();
+    updateUI();
+    shareBtn.style.display = 'none';
+
+    console.log('🐄 Простоквашино Челленджи v2.0 (VK Mini App) загружены!');
+    console.log('📊 Всего игр в истории:', history.length);
+    console.log('⚙️ Настройки:', settings);
+})();
