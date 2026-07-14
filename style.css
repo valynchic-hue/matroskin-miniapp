@@ -1,1 +1,508 @@
+/* ===== ОБЩИЕ СТИЛИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: -apple-system, 'Segoe UI', 'Comic Sans MS', cursive, sans-serif;
+    background: #ede3d3;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+}
+
+#root {
+    max-width: 500px;
+    width: 100%;
+    background: #fff8ed;
+    min-height: 100vh;
+    padding: 16px 16px 30px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+/* ===== ШАПКА ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 8px 0 12px;
+    border-bottom: 2px dashed #dcc29e;
+    position: sticky;
+    top: 0;
+    background: #fff8ed;
+    z-index: 10;
+}
+
+.header h1 {
+    font-size: 1.3rem;
+    color: #4d2e1b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header h1 .emoji-icon {
+    font-size: 1.6rem;
+}
+
+.close-btn {
+    background: #f0e4d4;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: #5a4030;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.close-btn:active {
+    transform: scale(0.9);
+    background: #e0d0bc;
+}
+
+.stats-badge {
+    background: #4d2e1b;
+    color: #fff8ed;
+    padding: 4px 12px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+.tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    background: #ede3d3;
+    border-radius: 60px;
+    padding: 4px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #5a4030;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.tab-btn.active {
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    color: #3d2b13;
+}
+
+.tab-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== СТРАНИЦЫ ===== */
+.page {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== СТРАНИЦА ИГРЫ ===== */
+.game-area {
+    background: #fff4e0;
+    border-radius: 24px;
+    padding: 16px 14px;
+    border: 2px solid #dbbd93;
+}
+
+.players {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.player-card {
+    background: #fffbee;
+    border-radius: 24px;
+    padding: 12px 14px;
+    border: 2px solid #dbbd93;
+}
+
+.player-card.matroskin {
+    border-color: #f58b3c;
+    background: #fff4e8;
+}
+
+.player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.player-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #3d2b13;
+}
+
+.player-name .emoji {
+    font-size: 1.4rem;
+}
+
+.player-score {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #4d2e1b;
+}
+
+.progress-track {
+    background: #d9c2a6;
+    border-radius: 40px;
+    height: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7bb3f0, #4a90d9);
+    border-radius: 40px;
+    transition: width 0.12s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.player-card.matroskin .progress-fill {
+    background: linear-gradient(90deg, #fdbb7a, #f58b3c);
+}
+
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.btn-primary {
+    background: #f5d742;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3d2b13;
+    box-shadow: 0 5px 0 #b38b2b, 0 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.06s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    border: 2px solid #fae394;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #b38b2b, 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #b38b2b;
+    pointer-events: none;
+}
+
+.btn-secondary {
+    background: #d9c2a6;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3d2b13;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid #cbb091;
+    box-shadow: 0 3px 0 #b0987a;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.btn-secondary:active {
+    transform: translateY(3px);
+    box-shadow: 0 0px 0 #b0987a;
+}
+
+.status-box {
+    background: #f4e4ce;
+    border-radius: 24px;
+    padding: 12px 14px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #3d2b13;
+    border: 2px solid #dbbd93;
+    margin-top: 12px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.status-box .emoji-big {
+    font-size: 1.4rem;
+}
+
+.btn-share {
+    background: #4a90d9;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid #3a7bc8;
+    box-shadow: 0 3px 0 #2a5f94;
+    font-family: inherit;
+    width: 100%;
+    margin-top: 12px;
+    touch-action: manipulation;
+}
+
+.btn-share:active {
+    transform: translateY(3px);
+    box-shadow: 0 0px 0 #2a5f94;
+}
+
+/* ===== СТАТИСТИКА ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    background: #fff4e0;
+    border-radius: 20px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 2px solid #dbbd93;
+}
+
+.stat-card .number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #4d2e1b;
+    line-height: 1.2;
+}
+
+.stat-card .label {
+    font-size: 0.8rem;
+    color: #7a5a3e;
+    font-weight: 600;
+}
+
+.stat-card.wins .number { color: #2d7d46; }
+.stat-card.losses .number { color: #b34a4a; }
+.stat-card.draws .number { color: #b38b2b; }
+.stat-card.total .number { color: #4d2e1b; }
+
+.history-list {
+    max-height: 180px;
+    overflow-y: auto;
+    background: #fffbee;
+    border-radius: 16px;
+    padding: 6px 10px;
+    border: 2px solid #dbbd93;
+}
+
+.history-item {
+    padding: 6px 2px;
+    border-bottom: 1px solid #ede3d3;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item .result {
+    font-weight: 600;
+}
+
+.result.win { color: #2d7d46; }
+.result.loss { color: #b34a4a; }
+.result.draw { color: #b38b2b; }
+
+.history-list::-webkit-scrollbar {
+    width: 4px;
+}
+.history-list::-webkit-scrollbar-thumb {
+    background: #dbbd93;
+    border-radius: 10px;
+}
+.history-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ===== НАСТРОЙКИ ===== */
+.settings-group {
+    background: #fff4e0;
+    border-radius: 20px;
+    padding: 14px 14px;
+    border: 2px solid #dbbd93;
+    margin-bottom: 12px;
+}
+
+.settings-group label {
+    display: block;
+    font-weight: 600;
+    color: #3d2b13;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+.settings-group input[type="range"] {
+    width: 100%;
+    accent-color: #f58b3c;
+    height: 6px;
+}
+
+.settings-group .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #7a5a3e;
+}
+
+.settings-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 16px;
+    border: 2px solid #dbbd93;
+    background: #fffbee;
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: #3d2b13;
+}
+
+.btn-danger {
+    background: #d97a7a;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #c06a6a;
+    box-shadow: 0 3px 0 #8f4a4a;
+    font-family: inherit;
+    transition: 0.2s;
+    width: 100%;
+    touch-action: manipulation;
+}
+
+.btn-danger:active {
+    transform: translateY(3px);
+    box-shadow: 0 0px 0 #8f4a4a;
+}
+
+.btn-vkpay {
+    background: #4a8f4a;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #3a7a3a;
+    box-shadow: 0 3px 0 #2a5a2a;
+    font-family: inherit;
+    transition: 0.2s;
+    width: 100%;
+    margin-top: 10px;
+    touch-action: manipulation;
+}
+
+.btn-vkpay:active {
+    transform: translateY(3px);
+    box-shadow: 0 0px 0 #2a5a2a;
+}
+
+/* ===== ПОДВАЛ ===== */
+.footer {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #b0987a;
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 420px) {
+    #root { padding: 10px 10px 20px; }
+    .header h1 { font-size: 1.1rem; }
+    .stats-badge { font-size: 0.65rem; padding: 3px 10px; }
+    .player-name { font-size: 0.95rem; }
+    .btn-primary { font-size: 1rem; padding: 12px 14px; }
+    .stat-card .number { font-size: 1.6rem; }
+    .tab-btn { font-size: 0.75rem; padding: 6px 8px; }
+}
+
+/* ===== VK UI стилизация ===== */
+.vkui-bridge {
+    --vkui--color_background_content: #fff8ed;
+    --vkui--color_background_secondary: #ede3d3;
+}
